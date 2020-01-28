@@ -1,0 +1,546 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>GameOfLife</class>
+ <widget class="QMainWindow" name="GameOfLife">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>840</width>
+    <height>920</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>840</width>
+    <height>920</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>840</width>
+    <height>920</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>GameOfLife</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../.designer/icons/gol.ico</normaloff>
+    <normalon>../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../.designer/icons/gol.ico</normalon>
+    <disabledoff>../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../.designer/icons/gol.ico</disabledoff>
+    <disabledon>../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../.designer/icons/gol.ico</disabledon>
+    <activeoff>../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../.designer/icons/gol.ico</activeoff>
+    <activeon>../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../.designer/icons/gol.ico</activeon>
+    <selectedoff>../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../.designer/icons/gol.ico</selectedoff>
+    <selectedon>../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../.designer/icons/gol.ico</selectedon>../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../.designer/icons/gol.ico</iconset>
+  </property>
+  <widget class="QWidget" name="mainWidget">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>830</width>
+     <height>630</height>
+    </size>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QWidget" name="topWidget" native="true">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_3">
+       <item>
+        <widget class="QWidget" name="historyWidget" native="true">
+         <layout class="QHBoxLayout" name="horizontalLayout_8">
+          <item>
+           <widget class="QCheckBox" name="historyCheckBox">
+            <property name="text">
+             <string>&amp;History</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QWidget" name="patternWidget" native="true">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <item>
+           <widget class="QLabel" name="patternLabel">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>Choose your starting Game of Life board:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="patternBox">
+            <item>
+             <property name="text">
+              <string>Empty</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Random</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Die Hard</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>R Pentomino</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Block-laying Switch Engine</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Block-laying Switch Engine v2</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Gosper Gilder Gun</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Load your pattern...</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <widget class="QWidget" name="gridWidget" native="true">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>800</width>
+        <height>600</height>
+       </size>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <item>
+        <widget class="QGraphicsView" name="grid">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <widget class="QWidget" name="bottomWidget" native="true">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_4">
+       <item>
+        <widget class="QWidget" name="zoomWidget" native="true">
+         <layout class="QHBoxLayout" name="horizontalLayout_9">
+          <item>
+           <widget class="QPushButton" name="zoomInButton">
+            <property name="maximumSize">
+             <size>
+              <width>25</width>
+              <height>25</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>+</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="zoomOutButton">
+            <property name="maximumSize">
+             <size>
+              <width>25</width>
+              <height>25</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>-</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <spacer name="bottomLeftSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Expanding</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QWidget" name="buttonWidget" native="true">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_2">
+          <item>
+           <widget class="QWidget" name="playClearWidget" native="true">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <layout class="QHBoxLayout" name="horizontalLayout_6">
+             <item>
+              <widget class="QPushButton" name="play">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>25</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+               <property name="icon">
+                <iconset>
+                 <normaloff>../../../../../../../../../../.designer/backup/icons/Play.ico</normaloff>
+                 <normalon>../../../../../../../../../../.designer/backup/icons/Stop.ico</normalon>../../../../../../../../../../.designer/backup/icons/Play.ico</iconset>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="clear">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="text">
+                <string>&amp;Clear</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item alignment="Qt::AlignHCenter">
+           <widget class="QWidget" name="speedWidget" native="true">
+            <layout class="QHBoxLayout" name="horizontalLayout_5">
+             <item alignment="Qt::AlignRight">
+              <widget class="QLabel" name="speedLabel">
+               <property name="text">
+                <string>Speed:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QSlider" name="speedSlider">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="cursor">
+                <cursorShape>PointingHandCursor</cursorShape>
+               </property>
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <spacer name="bottomRightSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Expanding</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item alignment="Qt::AlignRight">
+        <widget class="QWidget" name="saveWidget" native="true">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_7">
+          <item>
+           <widget class="QPushButton" name="save">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>&amp;Save</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="loadButton">
+            <property name="text">
+             <string>&amp;Load</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="UpperMenu">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>840</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menu_Save">
+    <property name="title">
+     <string>&amp;File</string>
+    </property>
+    <widget class="QMenu" name="New">
+     <property name="title">
+      <string>&amp;New</string>
+     </property>
+     <addaction name="Empty"/>
+     <addaction name="actionRandom"/>
+    </widget>
+    <addaction name="New"/>
+    <addaction name="Open"/>
+    <addaction name="separator"/>
+    <addaction name="Save"/>
+    <addaction name="Save_As"/>
+    <addaction name="separator"/>
+    <addaction name="separator"/>
+    <addaction name="Quit"/>
+   </widget>
+   <widget class="QMenu" name="menu_Edit">
+    <property name="title">
+     <string>&amp;Edit</string>
+    </property>
+    <addaction name="Next_Move"/>
+    <addaction name="History"/>
+    <addaction name="separator"/>
+   </widget>
+   <addaction name="menu_Save"/>
+   <addaction name="menu_Edit"/>
+  </widget>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="Empty"/>
+   <addaction name="Open"/>
+   <addaction name="Save"/>
+   <addaction name="separator"/>
+   <addaction name="Next_Move"/>
+   <addaction name="History"/>
+   <addaction name="separator"/>
+   <addaction name="Zoom_In"/>
+   <addaction name="Zoom_Out"/>
+  </widget>
+  <action name="Open">
+   <property name="icon">
+    <iconset>
+     <normaloff>../../../../../../../../../../../../../../../../../../../../../../../../../../.designer/icons/folder_open.gif</normaloff>../../../../../../../../../../../../../../../../../../../../../../../../../../.designer/icons/folder_open.gif</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Open</string>
+   </property>
+  </action>
+  <action name="action_History">
+   <property name="text">
+    <string>&amp;History</string>
+   </property>
+  </action>
+  <action name="Settings">
+   <property name="icon">
+    <iconset>
+     <normaloff>../../../../../../../../../../../../../../../../../../../../../../../../../../.designer/icons/settings.gif</normaloff>../../../../../../../../../../../../../../../../../../../../../../../../../../.designer/icons/settings.gif</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Settings</string>
+   </property>
+  </action>
+  <action name="Quit">
+   <property name="icon">
+    <iconset>
+     <normaloff>../../../../../../../../../../../../../../../../../../../../../../../../../../.designer/icons/action_delete.ico</normaloff>../../../../../../../../../../../../../../../../../../../../../../../../../../.designer/icons/action_delete.ico</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Quit</string>
+   </property>
+  </action>
+  <action name="Empty">
+   <property name="icon">
+    <iconset>
+     <normaloff>../../../../../../../../../../../../../../../../../../../../../../../../../../.designer/icons/new.gif</normaloff>../../../../../../../../../../../../../../../../../../../../../../../../../../.designer/icons/new.gif</iconset>
+   </property>
+   <property name="text">
+    <string>Empty</string>
+   </property>
+  </action>
+  <action name="actionRandom">
+   <property name="text">
+    <string>Random</string>
+   </property>
+  </action>
+  <action name="Save">
+   <property name="icon">
+    <iconset>
+     <normaloff>../../../../../../../../../../../../../../../../../../../../../../../../../../.designer/icons/save.gif</normaloff>../../../../../../../../../../../../../../../../../../../../../../../../../../.designer/icons/save.gif</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Save</string>
+   </property>
+  </action>
+  <action name="Save_As">
+   <property name="text">
+    <string>&amp;Save As</string>
+   </property>
+  </action>
+  <action name="Next_Move">
+   <property name="icon">
+    <iconset>
+     <normaloff>../../../../../../../../../../../../../../../../../../../../../../../../../../.designer/icons/next.gif</normaloff>../../../../../../../../../../../../../../../../../../../../../../../../../../.designer/icons/next.gif</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Next Move</string>
+   </property>
+  </action>
+  <action name="History">
+   <property name="icon">
+    <iconset>
+     <normaloff>../../../../../../../../../../../../../../../../../../../../../../../../../../.designer/icons/undo1.gif</normaloff>../../../../../../../../../../../../../../../../../../../../../../../../../../.designer/icons/undo1.gif</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;History</string>
+   </property>
+  </action>
+  <action name="Zoom_In">
+   <property name="icon">
+    <iconset>
+     <normaloff>../../../../../Applications/Mega/Università/II anno/I semestre/Human and Computer Interaction/esame/GameOfLife/build/icons/zoom_in.gif</normaloff>../../../../../Applications/Mega/Università/II anno/I semestre/Human and Computer Interaction/esame/GameOfLife/build/icons/zoom_in.gif</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Zoom In</string>
+   </property>
+  </action>
+  <action name="Zoom_Out">
+   <property name="icon">
+    <iconset>
+     <normaloff>../../../../../Applications/Mega/Università/II anno/I semestre/Human and Computer Interaction/esame/GameOfLife/build/icons/zoom_out.gif</normaloff>../../../../../Applications/Mega/Università/II anno/I semestre/Human and Computer Interaction/esame/GameOfLife/build/icons/zoom_out.gif</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Zoom Out</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
