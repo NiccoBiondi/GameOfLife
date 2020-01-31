@@ -120,10 +120,14 @@ class GOL_Controller(QtCore.QObject):
         """
         if self.sender().objectName() == 'zoomOutButton' or self.sender().objectName() == 'Zoom_Out':
             self.model.zoom_count = self.model.zoom_count - 1
-            value = 0.95 if self.model.zoom_count >=-12 else 1
+            value = 0.95 if self.model.zoom_count >=-5 else 1
+            if self.model.zoom_count <= -5:
+                self.model.zoom_count = -5
         else:
             self.model.zoom_count = self.model.zoom_count + 1
             value = 1.05 if self.model.zoom_count <= 5 else 1
+            if self.model.zoom_count >= 5:
+                self.model.zoom_count = 5
         self.scaleValueSignal.emit(value)
 
     def saveAs_board(self):
@@ -239,7 +243,7 @@ class GOL_Controller(QtCore.QObject):
         for cell in self.model.boardCell:
             rect,_,currentState = self.get_rect(cell._posx, cell._posy)
             for i,ls in enumerate(cell._lastStates):
-                if ls.isAlive() and not currentState:
+                 if ls.isAlive() and not currentState:
                     cell._historical = True
                     decay = len(cell._lastStates) - i
                     self.historyFillSignal.emit([rect,decay])
@@ -269,23 +273,21 @@ class GOL_Controller(QtCore.QObject):
                 line = line.replace('\n', '').split(',')
                 self.fill_cell( [self.model.boardCell[int(line[0])]._posx, self.model.boardCell[int(line[0])]._posy] )
                     
-    def set_pattern(self, pattern):
+    def set_pattern(self, pattern=None, text=None):
         """Set the pattern set by the user 
         """
         self.clear_board()
-        if pattern == 'Empty':
-            pass
-        elif pattern == 'Random':
+        if pattern == 'Random' or text == 'Random':
             self.random_board()
-        elif pattern == 'Die Hard':
+        elif pattern == 'Die Hard' or text == 'Die Hard':
             self.read_csv(DIR_NAME+'/backup-folder/pattern/Die Hard')
-        elif pattern == 'R Pentomino':
+        elif pattern == 'R Pentomino' or text == 'R Pentomino':
             self.read_csv(DIR_NAME+'/backup-folder/pattern/R-Pentomino')
-        elif pattern == 'Block-laying Switch Engine':
+        elif pattern == 'Block-laying Switch Engine' or text == 'Block-laying Switch Engine':
             self.read_csv(DIR_NAME+'/backup-folder/pattern/Block-laying Switch Engine')
-        elif pattern == 'Block-laying Switch Engine v2':
+        elif pattern == 'Block-laying Switch Engine v2' or text == 'Block-laying Switch Engine v2':
             self.read_csv(DIR_NAME+'/backup-folder/pattern/Block-laying Switch Engine v2')
-        elif pattern == 'Gosper Gilder Gun':
+        elif pattern == 'Gosper Gilder Gun' or text == 'Gosper Gilder Gun':
             self.read_csv(DIR_NAME+'/backup-folder/pattern/Gosper Gilder Gun')
         else:
             self.load_board_from_file()

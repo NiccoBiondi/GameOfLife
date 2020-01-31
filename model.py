@@ -1,6 +1,6 @@
 from PyQt5 import QtCore, QtGui
-from Cell import Cell
-from GOL_Board import GOL_Board
+from Components.Cell import Cell
+from Components.GOL_Board import GOL_Board
 import os, sys
 import numpy as np
 

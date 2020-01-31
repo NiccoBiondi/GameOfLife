@@ -403,13 +403,18 @@
      </property>
      <addaction name="Empty"/>
      <addaction name="actionRandom"/>
+     <addaction name="separator"/>
+     <addaction name="actionDie_Hard"/>
+     <addaction name="actionR_Pentomino"/>
+     <addaction name="actionBlock_laying_Switch_Engine"/>
+     <addaction name="actionBlock_laying_Switch_Engine_v2"/>
+     <addaction name="actionGosper_GIlder_Gun"/>
     </widget>
     <addaction name="New"/>
     <addaction name="Open"/>
     <addaction name="separator"/>
     <addaction name="Save"/>
     <addaction name="Save_As"/>
-    <addaction name="separator"/>
     <addaction name="separator"/>
     <addaction name="Quit"/>
    </widget>
@@ -420,6 +425,8 @@
     <addaction name="Next_Move"/>
     <addaction name="History"/>
     <addaction name="separator"/>
+    <addaction name="Zoom_In"/>
+    <addaction name="Zoom_Out"/>
    </widget>
    <addaction name="menu_Save"/>
    <addaction name="menu_Edit"/>
@@ -456,15 +463,6 @@
   <action name="action_History">
    <property name="text">
     <string>&amp;History</string>
-   </property>
-  </action>
-  <action name="Settings">
-   <property name="icon">
-    <iconset>
-     <normaloff>../../../../../../../../../../../../../../../../../../../../../../../../../../.designer/icons/settings.gif</normaloff>../../../../../../../../../../../../../../../../../../../../../../../../../../.designer/icons/settings.gif</iconset>
-   </property>
-   <property name="text">
-    <string>&amp;Settings</string>
    </property>
   </action>
   <action name="Quit">
@@ -536,6 +534,41 @@
     <iconset>
      <normaloff>../../../../../Applications/Mega/Università/II anno/I semestre/Human and Computer Interaction/esame/GameOfLife/build/icons/zoom_out.gif</normaloff>../../../../../Applications/Mega/Università/II anno/I semestre/Human and Computer Interaction/esame/GameOfLife/build/icons/zoom_out.gif</iconset>
    </property>
+   <property name="text">
+    <string>&amp;Zoom Out</string>
+   </property>
+  </action>
+  <action name="actionDie_Hard">
+   <property name="text">
+    <string>Die Hard</string>
+   </property>
+  </action>
+  <action name="actionR_Pentomino">
+   <property name="text">
+    <string>R Pentomino</string>
+   </property>
+  </action>
+  <action name="actionBlock_laying_Switch_Engine">
+   <property name="text">
+    <string>Block-laying Switch Engine</string>
+   </property>
+  </action>
+  <action name="actionBlock_laying_Switch_Engine_v2">
+   <property name="text">
+    <string>Block-laying Switch Engine v2</string>
+   </property>
+  </action>
+  <action name="actionGosper_GIlder_Gun">
+   <property name="text">
+    <string>Gosper GIlder Gun</string>
+   </property>
+  </action>
+  <action name="Zoom_In_2">
+   <property name="text">
+    <string>&amp;Zoom In</string>
+   </property>
+  </action>
+  <action name="Zoom_Out_2">
    <property name="text">
     <string>&amp;Zoom Out</string>
    </property>

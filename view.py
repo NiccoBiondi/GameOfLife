@@ -4,7 +4,7 @@ from PyQt5 import QtGui, QtCore, QtWidgets
 import sys, time, os, csv
 import numpy as np
 
-from Cell import Cell, AliveState, DeadState
+from Components.Cell import Cell
 
 DIR_NAME = os.path.dirname(os.path.abspath('__file__'))
 
@@ -13,11 +13,11 @@ GRAY = (150,150,161)
 BLUE = (22,22,199)
 ORANGE = (240,129,19)
 YELLOW = (240,201,2)
-YELLOW_1 = (224, 187, 0)
-YELLOW_2 = (207, 173, 0)
-YELLOW_3 = (179,149,0)
-YELLOW_4 = (152,132,0)
-YELLOW_5 = (130,108,0)
+HISTORY_1 = (224,157,1)     
+HISTORY_2 = (191, 134, 0)
+HISTORY_3 = (156,109,0)
+HISTORY_4 = (133,93,0)
+HISTORY_5 = (115,81,0)
 
 CELL_ALIVE_COLOR = QtGui.QColor(240,201,2)
 BACKGROUND_COLOR = CELL_DEAD_COLOR = QtGui.QColor(150,150,161)
@@ -72,11 +72,12 @@ class GOL_View(QMainWindow):
         if self.model.zoom_count > 0:
             scale_value = 0.95 ** self.model.zoom_count
         elif self.model.zoom_count < 0:
-            scale_value = 1.05 ** self.model.zoom_count
+            scale_value = 0.95 ** self.model.zoom_count
         else:
             scale_value = 1.0
         self.ui.grid.centerOn(QtCore.QPointF(self.model.max_window_dim[0]/2, self.model.max_window_dim[1]/2))
         self.ui.grid.scale(scale_value,scale_value)
+        self.model.zoom_count = 0
 
     def connect(self):
         """Connect push buttons to their functionality
@@ -92,15 +93,24 @@ class GOL_View(QMainWindow):
         # Add functionality where QActions are triggered
         self.ui.New.triggered.connect(lambda : self.controller.clear_board())
         self.ui.Next_Move.triggered.connect(lambda : self.nextMove())
-        self.ui.History.triggered.connect(lambda : self.controller.history())
         self.ui.Open.triggered.connect(lambda : self.controller.load_board_from_file())
         self.ui.Save.triggered.connect(lambda : self.controller.save_board())
         self.ui.Save_As.triggered.connect(lambda : self.controller.saveAs_board())
         self.ui.Zoom_In.triggered.connect(lambda : self.controller.zoom_view())
         self.ui.Zoom_Out.triggered.connect(lambda : self.controller.zoom_view())
+        self.ui.History.triggered.connect(lambda : self.history_action())
+        self.ui.History.setCheckable(True)
 
-        self.ui.historyCheckBox.stateChanged.connect(lambda : self.check_history())
-        
+        self.ui.actionRandom.triggered.connect(lambda : self.controller.set_pattern(text="Random"))
+        self.ui.actionDie_Hard.triggered.connect(lambda : self.controller.set_pattern(text="Die Hard"))
+        self.ui.actionR_Pentomino.triggered.connect(lambda : self.controller.set_pattern(text="R Pentomino"))
+        self.ui.actionBlock_laying_Switch_Engine.triggered.connect(lambda : self.controller.set_pattern(text="Block-laying Switch Engine"))
+        self.ui.actionBlock_laying_Switch_Engine_v2.triggered.connect(lambda : self.controller.set_pattern(text="Block-laying Switch Engine v2"))
+        self.ui.actionGosper_GIlder_Gun.triggered.connect(lambda : self.controller.set_pattern(text="Gosper Gilder Gun"))
+
+        self.ui.Quit.triggered.connect(lambda : sys.exit())
+
+        self.ui.historyCheckBox.stateChanged.connect(lambda : self.check_history())        
         self.ui.patternBox.activated.connect(lambda : self.controller.set_pattern(self.ui.patternBox.currentText()))
 
         self.controller.setCheckedSignal.connect(lambda : self.ui.play.setChecked(False))
@@ -133,17 +143,17 @@ class GOL_View(QMainWindow):
         rect.setData(self.model.NameItem, data)
 
     def fill_cell(self, cell, color=CELL_ALIVE_COLOR):
-        """Fill the cell 
+        """Fill the selected cell
         """
         cell.setBrush( QtGui.QBrush( color ) )
 
     def clear_cell(self, cell, color=CELL_DEAD_COLOR):
-        """Kill the cell 
+        """Kill the selected cell 
         """
         cell.setBrush( QtGui.QBrush( color ) )
 
     def nextMove(self):
-        """When the Next action is triggered, 
+        """When the Next action is triggered, that action will stop the board evolution
         """
         self.controller.play_stop_evolution()
         self.controller.boardEvolution()
@@ -154,20 +164,37 @@ class GOL_View(QMainWindow):
         rect = data[0]
         decay = data[1]
         if decay == 1:
-            new_color_intensity = YELLOW_1
+            new_color_intensity = HISTORY_1
         elif decay == 2:
-            new_color_intensity = YELLOW_2
+            new_color_intensity = HISTORY_2
         elif decay == 3:
-            new_color_intensity = YELLOW_4
+            new_color_intensity = HISTORY_4
         elif decay == 4:
-            new_color_intensity = YELLOW_4
+            new_color_intensity = HISTORY_4
         else:
-            new_color_intensity = YELLOW_5
+            new_color_intensity = HISTORY_5
         color = QtGui.QColor(new_color_intensity[0], new_color_intensity[1], new_color_intensity[2])
         self.fill_cell(rect, color)
 
     def check_history(self):
-        """
+        """Set model attribute history running like the status of the check box
         """
         self.model.history_running = self.ui.historyCheckBox.isChecked()
-        # self.controller.play_stop_evolution()
+
+    def history_action(self):
+        """Function called when History action is triggered. Here the user can observed
+        the history of the previous state, and also stop the board evolution.
+        If clicked twice, the history will be deleted from the grid
+        """
+        if not self.ui.History.isChecked():             
+            self.ui.History.setChecked(False)
+            print(self.ui.History.isChecked())
+            self.controller.clear_hist_board()
+
+        elif self.ui.History.isChecked():
+            self.ui.History.setChecked(True)
+            self.controller.play_stop_evolution()
+            self.controller.history()  
+
+
+
