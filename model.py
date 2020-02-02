@@ -44,6 +44,8 @@ class GameOfLife(QtCore.QObject):
 
         self._history_running = False
 
+        self._last_pattern = 'Empty'
+
     """ Getter methods for model attributes """
     @property
     def cell_size(self):
@@ -101,6 +103,10 @@ class GameOfLife(QtCore.QObject):
     def initialScale(self):
         return self._initialScale
 
+    @property
+    def last_pattern(self):
+        return self._last_pattern
+
     """ Setter methods for model attributes """
     @speed.setter
     def speed(self, slot):
@@ -130,6 +136,10 @@ class GameOfLife(QtCore.QObject):
     def hist_view(self, slot):
         self._hist_view = slot
     
+    @last_pattern.setter
+    def last_pattern(self, slot):
+        self._last_pattern = slot
+
     def init_board(self):
         """Create an empty GOL grid, init the speedSlider and
         compute the GOL cells neighborhood

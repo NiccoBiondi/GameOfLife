@@ -82,7 +82,7 @@ class GOL_View(QMainWindow):
     def connect(self):
         """Connect push buttons to their functionality
         """
-        self.ui.clear.clicked.connect(lambda : self.controller.clear_board())
+        self.ui.clear.clicked.connect(lambda : self.clear_pushed())
         self.ui.loadButton.clicked.connect(lambda : self.controller.load_board_with_path())
         self.ui.zoomInButton.clicked.connect(lambda : self.controller.zoom_view())
         self.ui.zoomOutButton.clicked.connect(lambda : self.controller.zoom_view())
@@ -91,7 +91,7 @@ class GOL_View(QMainWindow):
         self.ui.play.setCheckable(True)
 
         # Add functionality where QActions are triggered
-        self.ui.New.triggered.connect(lambda : self.controller.clear_board())
+        self.ui.New.triggered.connect(lambda : self.clear_pushed())
         self.ui.Next_Move.triggered.connect(lambda : self.nextMove())
         self.ui.Open.triggered.connect(lambda : self.controller.load_board_from_file())
         self.ui.Save.triggered.connect(lambda : self.controller.save_board())
@@ -188,7 +188,6 @@ class GOL_View(QMainWindow):
         """
         if not self.ui.History.isChecked():             
             self.ui.History.setChecked(False)
-            print(self.ui.History.isChecked())
             self.controller.clear_hist_board()
 
         elif self.ui.History.isChecked():
@@ -196,5 +195,9 @@ class GOL_View(QMainWindow):
             self.controller.play_stop_evolution()
             self.controller.history()  
 
-
+    def clear_pushed(self):
+        """
+        """
+        self.controller.clear_board()
+        self.ui.patternBox.setCurrentIndex(0)
 

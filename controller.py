@@ -104,7 +104,7 @@ class GOL_Controller(QtCore.QObject):
             if cell._state.isAlive():
                 self.clear_cell([cell._posx, cell._posy])
         self.clear_hist_board(resetting=True)
-
+        
     def clear_hist_board(self, resetting=False):
         """Clear all filled cell of history
         """
@@ -133,11 +133,14 @@ class GOL_Controller(QtCore.QObject):
     def saveAs_board(self):
         """Save method where the user can choose where to save his results
         """
-        options = QtWidgets.QFileDialog.Options()
-        options |= QtWidgets.QFileDialog.DontUseNativeDialog
-        path = QtWidgets.QFileDialog.getSaveFileName(caption="Choose save folder", directory=DIR_NAME, options=options)
-        if path != '':
-            self.save_csv(str(path[0]))
+        try:
+            options = QtWidgets.QFileDialog.Options()
+            options |= QtWidgets.QFileDialog.DontUseNativeDialog
+            path = QtWidgets.QFileDialog.getSaveFileName(caption="Choose save folder", directory=DIR_NAME, options=options)
+            if path != '':
+                self.save_csv(str(path[0]))
+        except Exception:
+            pass
 
     def save_board(self):
         """Autosave method for backup saving
@@ -158,12 +161,15 @@ class GOL_Controller(QtCore.QObject):
     def load_board_from_file(self):
         """Load GOL board from file
         """
-        self.clear_board()
-        options = QtWidgets.QFileDialog.Options()
-        options |= QtWidgets.QFileDialog.DontUseNativeDialog
-        file_path = QtWidgets.QFileDialog.getOpenFileName(caption="Choose csv file to load", directory=DIR_NAME, options=options)
-        if file_path != '':
-            self.read_csv(file_path[0])
+        try:
+            self.clear_board()
+            options = QtWidgets.QFileDialog.Options()
+            options |= QtWidgets.QFileDialog.DontUseNativeDialog
+            file_path = QtWidgets.QFileDialog.getOpenFileName(caption="Choose csv file to load", directory=DIR_NAME, options=options)
+            if file_path != '':
+                self.read_csv(file_path[0])
+        except Exception:
+            pass
     
     def change_speed(self, value): 
         """Change cell evolution speed [ms]
@@ -274,23 +280,32 @@ class GOL_Controller(QtCore.QObject):
                 self.fill_cell( [self.model.boardCell[int(line[0])]._posx, self.model.boardCell[int(line[0])]._posy] )
                     
     def set_pattern(self, pattern=None, text=None):
-        """Set the pattern set by the user 
+        """Set the pattern choosed by the user 
         """
         self.clear_board()
-        if pattern == 'Random' or text == 'Random':
+        if pattern == 'Empty' or text == 'Empty':
+            self.model.last_pattern = 'Empty'
+        elif pattern == 'Random' or text == 'Random':
+            self.model.last_pattern = 'Random'
             self.random_board()
         elif pattern == 'Die Hard' or text == 'Die Hard':
+            self.model.last_pattern = 'Die Hard'
             self.read_csv(DIR_NAME+'/backup-folder/pattern/Die Hard')
         elif pattern == 'R Pentomino' or text == 'R Pentomino':
+            self.model.last_pattern = 'R Pentomino'
             self.read_csv(DIR_NAME+'/backup-folder/pattern/R-Pentomino')
         elif pattern == 'Block-laying Switch Engine' or text == 'Block-laying Switch Engine':
+            self.model.last_pattern = 'Block-laying Switch Engine'
             self.read_csv(DIR_NAME+'/backup-folder/pattern/Block-laying Switch Engine')
         elif pattern == 'Block-laying Switch Engine v2' or text == 'Block-laying Switch Engine v2':
+            self.model.last_pattern = 'Block-laying Switch Engine v2'
             self.read_csv(DIR_NAME+'/backup-folder/pattern/Block-laying Switch Engine v2')
         elif pattern == 'Gosper Gilder Gun' or text == 'Gosper Gilder Gun':
+            self.model.last_pattern = 'Gosper Gilder Gun'
             self.read_csv(DIR_NAME+'/backup-folder/pattern/Gosper Gilder Gun')
         else:
             self.load_board_from_file()
+
 
     def random_board(self):
         """Inizialize random state for all cells in the GOL board
