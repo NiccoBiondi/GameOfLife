@@ -18,7 +18,7 @@ The game is played on a two-dimensional grid (or board). Each grid location is e
 * each populated location with two or three neighbors survives;
 * each unpopulated location that becomes populated if it has exactly three populated neighbors.
 
-#
+
 ## My Implementation
 
 In the [Model](model.py) there are definitions and methods for managing application's data.
