@@ -1,4 +1,4 @@
-from PyQt5 import QtCore, QtGui
+from PyQt5 import QtCore, QtGui, QtWidgets
 from Components.Cell import Cell
 from Components.GOL_Board import GOL_Board
 import os, sys, csv
@@ -319,14 +319,14 @@ class GameOfLife(QtCore.QObject):
     def zoom_view(self):
         """ Zooming the grid view according to the slider value
             The zoom count stores the number of user click:
-                0 means no zoom; +5 is the max zoom in; -5 the min one
+                0 means no zoom; +5 is the max zoom in; -4 the min one
             "value" is the zoom factor, it's an empirical factor
         """
         if self.sender().objectName() == 'zoomOutButton' or self.sender().objectName() == 'Zoom_Out':
             self.zoom_count = self.zoom_count - 1
-            value = 0.95 if self.zoom_count >=-5 else 1
-            if self.zoom_count <= -5:
-                self.zoom_count = -5
+            value = 0.95 if self.zoom_count >=-4 else 1
+            if self.zoom_count <= -4:
+                self.zoom_count = -4
         else:
             self.zoom_count = self.zoom_count + 1
             value = 1.05 if self.zoom_count <= 5 else 1

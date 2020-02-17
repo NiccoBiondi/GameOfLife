@@ -1,7 +1,7 @@
 from build.Ui_GameOfLife import Ui_GameOfLife
 from PyQt5.QtWidgets import QApplication, QMainWindow, QDialog, qApp, QGraphicsScene
 from PyQt5 import QtGui, QtCore, QtWidgets
-import sys, time, os, csv
+import sys, os, csv
 import numpy as np
 
 from Components.Cell import Cell
