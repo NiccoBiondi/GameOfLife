@@ -33,6 +33,8 @@ The [Controller](controller.py) interprets user interactions in the View and man
 
 ## Functionalities
 
+![My Game of Life GUI](images/app_GUI.png)
+
 ### Play/Pause evolution and clear the board
 The user can always start the evolution of the current Game of Life board. In every moment he can stop the cells' updates both clearing the universe (with the dedicate button) and simply stop it clicking on the appropriate icon. If the user want to see just one update of the grid, he can use the tool bar menu or the Edit menu choosing the Next action.
 

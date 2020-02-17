@@ -38,7 +38,6 @@ class AliveState(CellState):
 
 
 class Cell(object):
-
     """Represents a Cell. Either DeadState or AliveState.
     """
     def __init__(self, x, y, state=DeadState(), historical=False):
@@ -48,7 +47,7 @@ class Cell(object):
         self._posy = y
         self._state = state
         self._nextState = self._state
-        self._lastStates = []   #self._state
+        self._lastStates = []
         self._neighbors = []
         self._historical = historical
 
@@ -112,8 +111,3 @@ class Cell(object):
 
     def set_historical(boolean):
         self._historical = boolean
-
-    def __str__(self):
-        return self.isAlive() and 'X' or '-'
-
-    __nonzero__ = isAlive

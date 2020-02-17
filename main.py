@@ -1,18 +1,16 @@
 from PyQt5 import QtGui, QtCore, QtWidgets
-import sys
-# sys.path.insert(1, os.path.dirname(os.path.abspath('__file__')))
 from model import GameOfLife
-from controller import GOL_Controller
 from view import GOL_View
 
-if __name__ == '__main__':
-    app = QtWidgets.QApplication(sys.argv)
-    GOL_model = GameOfLife()
-    GOL_controller = GOL_Controller(GOL_model)
-    GOL_view = GOL_View(GOL_model, GOL_controller)
+import sys
 
-    """ Start Game of Life """
+if __name__ == '__main__':
+    gol = QtWidgets.QApplication(sys.argv)
+    GOL_model = GameOfLife()
+    GOL_view = GOL_View(GOL_model) 
+
+    """ Start Game of Life engine """
     GOL_model.init_board()
 
     GOL_view.show()
-    sys.exit(app.exec_())
+    sys.exit(gol.exec_())
