@@ -184,12 +184,19 @@ class GameOfLife(QtCore.QObject):
         delta = int(self.scene.height()/self.cell_size)
         idx = self.get_rectId(rect)
         for x in range(-1,2):
-            if idx-delta+x > 0:
-                self.boardCell[idx].setNeighbor(self.boardCell[idx-delta+x])
-            if x != 0 and idx+x < len(self.boardCell):
-                self.boardCell[idx].setNeighbor(self.boardCell[idx+x])
-            if idx+delta+x < len(self.boardCell):
-                self.boardCell[idx].setNeighbor(self.boardCell[idx+delta+x])
+            # col needs to check if the next (or previous) neighbor is on the same board column of idx
+            # if yes the entaire row will be not included in idx neighborhood
+            col = idx // delta
+            if (idx+x)//delta == col:
+                # upper neighbors
+                if idx-delta+x >= 0:
+                    self.boardCell[idx].setNeighbor(self.boardCell[idx-delta+x])
+                # aside neighbors
+                if x != 0 and idx+x < len(self.boardCell):
+                    self.boardCell[idx].setNeighbor(self.boardCell[idx+x])
+                # lower neighbors
+                if idx+delta+x < len(self.boardCell): 
+                    self.boardCell[idx].setNeighbor(self.boardCell[idx+delta+x])
 
 
     # Game Of Life engine methods
@@ -277,6 +284,9 @@ class GameOfLife(QtCore.QObject):
         """
         try:
             cell, idx, currentState = self.get_rect(pos[0], pos[1])
+            print(idx, idx//60) ########################################################
+            for c in self.boardCell[idx]._neighbors:
+                print(self.get_rect(c._posx, c._posy)[1])
             self.boardCell[idx]._historical = False
             self.boardCell[idx].setToAlive()
             self.fillCellSignal.emit(cell)
