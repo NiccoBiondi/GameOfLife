@@ -34,22 +34,21 @@ class GameOfLife(QtCore.QObject):
         self._scene = GOL_Board()
         self._initialScale = 0.7
 
-        self._running = False
-        self._counterItems = 0 
-        self._boardDim = self.max_window_dim       
+        self._running = False           # check if the board is evolving
+        self._counterItems = 0          # counter for item id  
         self._boardCell = np.zeros((self.max_window_dim[0]//10)*(self.max_window_dim[1]//10)).tolist()
 
-        self._speed = 500       # evolution speed of GOL view
-        self._zoom_count = 0    # number of zoom on the board
+        self._speed = 500               # evolution speed of GOL view
+        self._zoom_count = 0            # number of zoom on the board
 
-        # Timer     
+        # Timer for board evolution 
         self.timer = QtCore.QTimer()
         self.timer.setInterval(self.speed)
         self.timer.timeout.connect(lambda : self.boardEvolution())
 
-        self._history_running = False
+        self._history_running = False   # check if the history evolution is checked
 
-        self._last_pattern = 'Empty'
+        self._last_pattern = 'Empty'    # set the default GOL pattern
 
         """ Model Signal """
         self.scene.aliveCellSignal.connect(self.fill_cell)
@@ -94,10 +93,6 @@ class GameOfLife(QtCore.QObject):
     def boardCell(self):
         return self._boardCell
     
-    @property
-    def boardDim(self):
-        return self._boardDim
-
     @property
     def scene(self):
         return self._scene
@@ -205,16 +200,6 @@ class GameOfLife(QtCore.QObject):
         """
         for cell in self.boardCell:
             if cell._nextState.isAlive():
-                self.fill_cell([cell._posx, cell._posy])
-            else:
-                self.clear_cell([cell._posx, cell._posy])
-
-    def undo_state(self):
-        """ Change view in order to undo the last move
-        """
-        for cell in self.boardCell:
-            last_state = cell._lastStates.pop() if len(cell._lastStates)>1 else cell._lastStates[-1]
-            if last_state.isAlive():
                 self.fill_cell([cell._posx, cell._posy])
             else:
                 self.clear_cell([cell._posx, cell._posy])
@@ -336,7 +321,7 @@ class GameOfLife(QtCore.QObject):
                 self.zoom_count = -5
         else:
             self.zoom_count = self.zoom_count + 1
-            value = 1.03 if self.zoom_count <= 5 else 1
+            value = 1.05 if self.zoom_count <= 5 else 1
             if self.zoom_count >= 5:
                 self.zoom_count = 5
         self.scaleValueSignal.emit(value)
