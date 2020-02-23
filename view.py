@@ -156,6 +156,7 @@ class GOL_View(QMainWindow):
         """ When the Next action is triggered, that action will stop the board evolution
         """
         self.model.play_stop_evolution()
+        self.ui.History.setChecked(False)
         self.model.boardEvolution()
     
     def change_cell_intensity(self, data):
@@ -182,7 +183,7 @@ class GOL_View(QMainWindow):
         self.model.history_running = self.ui.historyCheckBox.isChecked()
 
     def history_action(self):
-        """ Function called when History action is triggered. Here the user can observed
+        """ Function called when History action is triggered. Here the user can observe
             the history of the previous state, and also stop the board evolution.
             If clicked twice, the history will be deleted from the grid
         """

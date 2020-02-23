@@ -284,9 +284,6 @@ class GameOfLife(QtCore.QObject):
         """
         try:
             cell, idx, currentState = self.get_rect(pos[0], pos[1])
-            print(idx, idx//60) ########################################################
-            for c in self.boardCell[idx]._neighbors:
-                print(self.get_rect(c._posx, c._posy)[1])
             self.boardCell[idx]._historical = False
             self.boardCell[idx].setToAlive()
             self.fillCellSignal.emit(cell)
@@ -334,12 +331,12 @@ class GameOfLife(QtCore.QObject):
         """
         if self.sender().objectName() == 'zoomOutButton' or self.sender().objectName() == 'Zoom_Out':
             self.zoom_count = self.zoom_count - 1
-            value = 0.95 if self.zoom_count >=-4 else 1
-            if self.zoom_count <= -4:
-                self.zoom_count = -4
+            value = 0.95 if self.zoom_count >=-5 else 1
+            if self.zoom_count <= -5:
+                self.zoom_count = -5
         else:
             self.zoom_count = self.zoom_count + 1
-            value = 1.05 if self.zoom_count <= 5 else 1
+            value = 1.03 if self.zoom_count <= 5 else 1
             if self.zoom_count >= 5:
                 self.zoom_count = 5
         self.scaleValueSignal.emit(value)
