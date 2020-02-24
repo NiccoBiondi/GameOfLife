@@ -4,7 +4,7 @@ The Game of Life was invented in 1970 by the British mathematician John Horton C
 
 This repository is my PyQt implementation of Conway's Game of Life, that follows the architectural pattern **Model-View-Controller**. 
 
-<div style="text-align:center"><img src="images/app.gif" /></div>
+<div style="text-align:center"><img src="images/GOL.gif" /></div>
 
 ## Game of Life Rules
 
