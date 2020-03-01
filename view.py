@@ -79,7 +79,7 @@ class GOL_View(QMainWindow):
         self.model.zoom_count = 0
 
     def connect(self):
-        """ Connect push buttons to their functionality
+        """ Connect push buttons and tool bar, menu action to their functionality
         """
         # Add functionality when buttons are clicked
         self.ui.clear.clicked.connect(lambda : self.clear_pushed())

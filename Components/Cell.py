@@ -1,3 +1,4 @@
+
 class CellState(object):
     """Abstract CellState class
     """
@@ -18,9 +19,6 @@ class DeadState(CellState):
         """
         return self.state
 
-    def __nonzero__(self):
-        return False
-
 
 class AliveState(CellState):
     """State representing Live Cell
@@ -32,9 +30,6 @@ class AliveState(CellState):
         """Checks whether the state is LiveState
         """
         return self.state
-
-    def __nonzero__(self):
-        return True
 
 
 class Cell(object):
@@ -109,5 +104,5 @@ class Cell(object):
         self._nextState = nextState
         return self._nextState
 
-    def set_historical(boolean):
+    def set_historical(self, boolean):
         self._historical = boolean

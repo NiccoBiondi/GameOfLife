@@ -41,14 +41,13 @@ class GameOfLife(QtCore.QObject):
         self._speed = 500               # evolution speed of GOL view
         self._zoom_count = 0            # number of zoom on the board
 
+        self._history_running = False   # check if the history evolution is checked
+        self._last_pattern = 'Empty'    # set the default GOL pattern
+
         # Timer for board evolution 
         self.timer = QtCore.QTimer()
         self.timer.setInterval(self.speed)
         self.timer.timeout.connect(lambda : self.boardEvolution())
-
-        self._history_running = False   # check if the history evolution is checked
-
-        self._last_pattern = 'Empty'    # set the default GOL pattern
 
         """ Model Signal """
         self.scene.aliveCellSignal.connect(self.fill_cell)
@@ -153,7 +152,6 @@ class GameOfLife(QtCore.QObject):
             compute the GOL cells neighborhood
         """
         self.initViewSignal.emit()
-        # self.createGridSignal.emit()
         self.create_grid()
 
     def create_grid(self):

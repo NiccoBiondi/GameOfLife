@@ -41,8 +41,3 @@ class GOL_Board(QtWidgets.QGraphicsScene):
 
         except Exception as e:
             pass
-        
-    def mouseReleaseEvent(self, event):
-        """Function called when the muose was released 
-        """
-        pass
