@@ -19,7 +19,7 @@ The game is played on a two-dimensional grid (or board). Each grid location is e
 * each unpopulated location that becomes populated if it has exactly three populated neighbors.
 
 
-## My Implementation
+## Overview
 
 In the [Model](model.py) there are definitions and methods for managing application's data.
 
@@ -60,18 +60,10 @@ For show just one state's history the user can click on the History action in th
 Clone the repository and enjoy with Game of Life!
 
 ```sh
+$ git clone git@github.com:NiccoBiondi/GameOfLife.git
 $ cd GameOfLife
 $ python ./main.py
 ```
 
-## Requirements
-
-My implementation is tested with the following packages versions.
-
-| Package | Version |
-| ------ | ------ | 
-| Python | 3.7 |
-| PyQt | 5.9 | 
-| numpy | 1.17 |
 
 
