@@ -62,7 +62,7 @@ Clone the repository and enjoy with Game of Life!
 ```sh
 $ git clone git@github.com:NiccoBiondi/GameOfLife.git
 $ cd GameOfLife
-$ python ./main.py
+$ python main.py
 ```
 
 
