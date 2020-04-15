@@ -178,7 +178,7 @@ class GameOfLife(QtCore.QObject):
         idx = self.get_rectId(rect)
         for x in range(-1,2):
             # col needs to check if the next (or previous) neighbor is on the same board column of idx
-            # if yes the entaire row will be not included in idx neighborhood
+            # if yes the entire row will be not included in idx neighborhood
             col = idx // delta
             if (idx+x)//delta == col:
                 # upper neighbors
@@ -204,7 +204,7 @@ class GameOfLife(QtCore.QObject):
 
     def boardEvolution(self):
         """ For each cell on the GOL grid is computed its evolution based on the rules game
-            If history_running is True, the last 5 states for each board cell is shown
+            If history_running is True, the last 5 states for each board cell are shown
             If history_running is False, the app will clear all the histrory cells
         """
         for i in range(len(self.boardCell)):
@@ -229,7 +229,7 @@ class GameOfLife(QtCore.QObject):
             self.show_hist()
 
     def play_stop_evolution(self):
-        """ Select the correct behavior according to the name of the pushButton that call this method
+        """ Select the correct behavior according to the name of the pushButton that calls this method
         """
         if (self.sender().objectName() == 'play') and (self.running==False):
             self.running = True
